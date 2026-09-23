@@ -1,29 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "base.html" %}
 
-    <title>{% block title %}Lakastah{% endblock %}</title>
-</head>
 
-<body>
+{% block title %}
+Lakastah | Discover Brunei
+{% endblock %}
 
-    <nav>
-        <a href="{% url 'home' %}">
-            Lakastah
-        </a>
 
-        <a href="#">Explore</a>
-        <a href="#">Volunteer</a>
-        <a href="#">Workshops</a>
-        <a href="#">Submit</a>
-    </nav>
+{% block content %}
 
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
+<section>
 
-</body>
-</html>
+    <h1>Lakastah</h1>
+
+    <p>
+        Discover events, workshops, volunteer opportunities
+        and activities happening around Brunei.
+    </p>
+
+</section>
+
+
+<section>
+
+    <h2>Upcoming</h2>
+
+    {% for listing in listings %}
+
+        <article>
+
+            <h3>
+                {{ listing.title }}
+            </h3>
+
+            <p>
+                {{ listing.get_category_display }}
+            </p>
+
+            <p>
+                Starts at: {{ listing.start_date }}, {{ listing.start_time }}
+            </p>
+
+            <p>
+                Held at: {{ listing.location }}
+            </p>
+
+            <p>
+                by {{ listing.organiser_name }}
+            </p>
+
+        </article>
+
+    {% empty %}
+
+        <p>
+            No upcoming activities yet.
+        </p>
+
+    {% endfor %}
+
+</section>
+
+{% endblock %}

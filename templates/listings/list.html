@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Explore | Lakastah
+{% endblock %}
+
+
+{% block content %}
+
+<h1>Explore Lakastah</h1>
+
+<p>
+    Discover what's happening around Brunei.
+</p>
+
+
+{% for listing in listings %}
+
+    <article>
+
+        <h2>
+            {{ listing.title }}
+        </h2>
+
+        <p>
+            {{ listing.get_category_display }}
+        </p>
+
+        <p>
+            📅 {{ listing.start_date }}
+        </p>
+
+        {% if listing.start_time %}
+
+            <p>
+                🕐 {{ listing.start_time }}
+            </p>
+
+        {% endif %}
+
+
+        {% if listing.location %}
+
+            <p>
+                📍 {{ listing.location }}
+            </p>
+
+        {% endif %}
+
+
+        <p>
+            Organised by:
+            {{ listing.organiser_name }}
+        </p>
+
+
+        <hr>
+
+    </article>
+
+
+{% empty %}
+
+    <p>
+        Nothing happening yet. Check back soon!
+    </p>
+
+{% endfor %}
+
+
+{% endblock %}
